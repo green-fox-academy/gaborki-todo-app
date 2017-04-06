@@ -14,10 +14,11 @@ public class App {
   public static void main(String[] args) {
     ToDoList myList = new ToDoList(args);
 
-   myList.welcomeMessage();
-   myList.listTask();
-   myList.addTaskToList();
-   myList.removeTask();
+    myList.welcomeMessage();
+    myList.listTask();
+    myList.addTaskToList();
+    myList.removeTask();
+    myList.argError();
   }
 }
 

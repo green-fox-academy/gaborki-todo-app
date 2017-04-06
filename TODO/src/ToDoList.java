@@ -99,24 +99,31 @@ public class ToDoList {
         if (args[0].contains("-r") && args.length < 2) {
           System.out.println("Unable to remove: no index provided");
           System.out.println();
-        } else if(list.size() < Integer.parseInt(args[1])) {
+        } else if (list.size() < Integer.parseInt(args[1])) {
           System.out.println("Unable to remove: index is out of bound");
           System.out.println();
         } else if (areThereTwoArgs(args)) {
-            index = Integer.parseInt(args[1]);
-            list.remove(index - 1);
-            Files.write(tList, list);
+          index = Integer.parseInt(args[1]);
+          list.remove(index - 1);
+          Files.write(tList, list);
         }
       }
     } catch (IOException ex) {
       ex.printStackTrace();
-    }catch (Exception e){
+    } catch (Exception e) {
       System.out.println("Unable to remove: index is not a number ");
       System.out.println();
     }
   }
 
-  public ToDoList(String[]args){
-      this.args = args;
-    }
+  void argError(){
+    if (args.length == 0 || !args[0].startsWith("-"));
+    System.out.println();
+    System.out.println("Unsupported argument");
+    System.out.println();
   }
+
+  public ToDoList(String[] args) {
+    this.args = args;
+  }
+}
