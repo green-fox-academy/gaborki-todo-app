@@ -49,15 +49,26 @@ public class ToDoList {
       if (isThereArgs(args) && args[0].length() < 3 && args[0].contains("-l")) {
         tasks = Files.readAllLines(taskList);
         System.out.println();
-        for (int i = 0; i < tasks.size(); i++) {
-          System.out.println((i + 1) + " - " + tasks.get(i));
+        if(tasks.size() == 0){
+          System.out.println("No todos for today!");
         }
-        System.out.println();
+        else {
+          for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + " - " + tasks.get(i));
+          }
+          System.out.println();
+        }
       }
     } catch (IOException ex) {
       ex.printStackTrace();
     }
   }
+
+  void emptyList(){
+
+
+  }
+
 
   public ToDoList(String[] args) {
     this.args = args;
