@@ -1,4 +1,4 @@
-Python Todo application
+Java Todo application
 =======================
 
 Command line arguments:
