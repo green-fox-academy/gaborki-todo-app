@@ -91,22 +91,28 @@ public class ToDoList {
   void removeTask() {
     Path tList = Paths.get("tasks.txt");
     List<String> list;
-    int index;
     try {
+      int index;
+      list = Files.readAllLines(tList);
       if (args[0].contains("-r") && args[0].length() < 3) {
-        if (areThereTwoArgs(args)) {
-          list = Files.readAllLines(tList);
-          index = Integer.parseInt(args[1]) - 1;
-          list.remove(index);
-          Files.write(tList, list);
-        } else {
+        System.out.println();
+        if (args[0].contains("-r") && args.length < 2) {
+          System.out.println("Unable to remove: no index provided");
           System.out.println();
-          System.out.println("Unable to add: No task provided");
+        } else if(list.size() < Integer.parseInt(args[1])) {
+          System.out.println("Unable to remove: index is out of bound");
           System.out.println();
+        } else if (areThereTwoArgs(args)) {
+            index = Integer.parseInt(args[1]);
+            list.remove(index - 1);
+            Files.write(tList, list);
         }
       }
     } catch (IOException ex) {
       ex.printStackTrace();
+    }catch (Exception e){
+      System.out.println("Unable to remove: index is not a number ");
+      System.out.println();
     }
   }
 
