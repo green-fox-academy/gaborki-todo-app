@@ -17,6 +17,7 @@ public class App {
    myList.welcomeMessage();
    myList.listTask();
    myList.addTaskToList();
+   myList.removeTask();
   }
 }
 
