@@ -9,15 +9,16 @@ import java.util.List;
  */
 public class ToDoList {
 
-  Path welcomeMessage = Paths.get("welcomeManual.txt");
-  Path taskList = Paths.get("tasks.txt");
-  List<String> welcomeM;
-  List<String> tasks;
   String args[];
 
   boolean isThereArgs(String[] args) {
     this.args = args;
     return (args.length > 0);
+  }
+
+  boolean areThereTwoArgs(String[] args){
+    this.args = args;
+    return (args.length > 1);
   }
 
   int howManyArgs(String[] args) {
@@ -30,6 +31,8 @@ public class ToDoList {
   }
 
   void welcomeMessage() {
+    Path welcomeMessage = Paths.get("welcomeManual.txt");
+    List<String> welcomeM;
     try {
       welcomeM = Files.readAllLines(welcomeMessage);
       if (!isThereArgs(args)) {
@@ -45,6 +48,8 @@ public class ToDoList {
   }
 
   void listTask(){
+    Path taskList = Paths.get("tasks.txt");
+    List<String> tasks;
     try {
       if (isThereArgs(args) && args[0].length() < 3 && args[0].contains("-l")) {
         tasks = Files.readAllLines(taskList);
@@ -64,13 +69,26 @@ public class ToDoList {
     }
   }
 
-  void emptyList(){
-
-
+  void addTaskToList(){
+    Path tList = Paths.get("tasks.txt");
+    List<String> list;
+    try {
+      if (args[0].contains("-a") && args[0].length() < 3) {
+        if (areThereTwoArgs(args)) {
+          list = Files.readAllLines(tList);
+          list.add(args[1]);
+          Files.write(tList, list);
+        }
+        else{
+            System.out.println("Unable to add: No task provided");
+          }
+        }
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
-
 
   public ToDoList(String[] args) {
     this.args = args;
+    }
   }
-}
