@@ -19,6 +19,7 @@ public class App {
     myList.addTaskToList();
     myList.removeTask();
     myList.argError();
+    myList.checkTask();
   }
 }
 

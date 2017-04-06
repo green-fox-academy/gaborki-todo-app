@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -116,11 +117,34 @@ public class ToDoList {
     }
   }
 
-  void argError(){
-    if (args.length == 0 || !args[0].startsWith("-"));
-    System.out.println();
-    System.out.println("Unsupported argument");
-    System.out.println();
+  void checkTask() {
+    Path taskList = Paths.get("tasks.txt");
+    List<String> tasks;
+    try {
+      tasks = Files.readAllLines(taskList);
+      if (areThereTwoArgs(args) && args[0].length() < 3 && args[0].contains("-c")) {
+        for (int i = 0; i < tasks.size(); i++) {
+          if (!tasks.get(i).startsWith("[")) {
+            tasks.set(i, "[ ] " + tasks.get(i));
+          }
+          if ((i + 1) == Integer.parseInt(args[1])) {
+            tasks.set(i, tasks.get(i).substring(0, 1) + "x" + tasks.get(i).substring(2));
+          }
+        }
+      }
+      Files.write(taskList, tasks);
+    }
+    catch (IOException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  void argError() {
+    if (args.length == 0 || !args[0].startsWith("-")) {
+      System.out.println();
+      System.out.println("Unsupported argument");
+      System.out.println();
+    }
   }
 
   public ToDoList(String[] args) {

@@ -1,3 +1,4 @@
-Walk the dog
-Buy milk
-Do homework
+[ ] Walk the dog
+[x] Buy milk
+[x] Do homework
+[ ] Nem tudom
